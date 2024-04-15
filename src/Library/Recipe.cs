@@ -14,6 +14,7 @@ namespace Full_GRASP_And_SOLID.Library
         private ArrayList steps = new ArrayList();
 
         public Product FinalProduct { get; set; }
+        
 
         public void AddStep(Step step)
         {
@@ -33,6 +34,18 @@ namespace Full_GRASP_And_SOLID.Library
                 Console.WriteLine($"{step.Quantity} de '{step.Input.Description}' " +
                     $"usando '{step.Equipment.Description}' durante {step.Time}");
             }
+        }
+        public void GetProductionCost()   // este metodo funciona para devolver el costo total de la preparacion
+        {
+            double Total = 0;
+            foreach (Step item in steps)
+            {
+                ProductionCost a =new ProductionCost(item);
+                Console.WriteLine(a.CalCost());
+                Total += a.CostoInsumos() + a.CostoEquipo();
+            }
+            Console.WriteLine($"Costo Total de la prepararación es de ${Total}.");
+             
         }
     }
 }
